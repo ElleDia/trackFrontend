@@ -6,7 +6,8 @@ let tableVisibility = null;
 // import * as XLSX from 'xlsx';
 
 document.addEventListener('DOMContentLoaded', event => {
-    baseUrl = 'http://localhost:3000';
+    // baseUrl = 'http://localhost:3000';
+    baseUrl = 'https://trackbackend-3c7y.onrender.com'
 
     if (sessionStorage.getItem('AuthenticationState') === null) {
         window.open("login.html", "_self");
