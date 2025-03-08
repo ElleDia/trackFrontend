@@ -1,0 +1,243 @@
+body {
+  position: relative;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  overflow: hidden;
+}
+
+
+body::before {
+  background-image: url('https://lh3.google.com/u/0/d/1P_sXhxMgKPTofYoDTpA0C9dbIBVhqhAu=w1830-h1632-iv1');
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(5px);
+  z-index: -1;
+}
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background: linear-gradient(135deg, rgba(1, 5, 40, 0.9), rgba(4, 7, 10, 0.7));
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 20px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+#logo {
+  width: 250px;
+  height: 250px;
+  position: relative;
+  left: 0px;
+  top: -10px;
+}
+.sidebar a {
+  position: relative;
+  top: -50px;
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* Main content styles */
+#main {
+  transition: margin-left .5s;
+  padding: 16px;
+}
+
+.header {
+  background-color: #011830;
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar {
+  flex-grow: 1;
+  margin: 0 20px;
+}
+
+.search-bar input {
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.search-bar button {
+  padding: 5px 10px;
+}
+
+.signout {
+  margin-left: 20px;
+}
+
+/* table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+} */
+.table-container {
+  max-height: 400px;
+  overflow-y: auto;
+  margin: 20px 0;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+table {
+  width: 100%;
+  border-collapse: separate; /* Use separate borders to allow rounded corners */
+  border-spacing: 0;
+  margin: 20px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th {
+  background-color: #021830;
+  color: white;
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+td {
+  padding: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+tbody tr:hover {
+  background: rgba(0, 123, 255, 0.1);
+}
+
+th:first-child,
+td:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+th:last-child,
+td:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.footer {
+  background-color: rgba(241, 241, 241, 0.5); /* Semi-transparent background */
+  color: #333;
+  text-align: center;
+  right: 3px;
+  padding: 10px 10px;
+  position: relative;
+  top: 618px;
+  width: 100%;
+  bottom: 0;
+}
+
+
+
+.newRow {
+  width: 100%;
+  padding: 15px;
+  font-size: 18px;
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.newRow:hover {
+  background-color: #0056b3;
+}
+
+td[colspan="7"] {
+  text-align: center;
+  padding: 20px 0;
+  background: transparent; /* Ensure the background of the cell is transparent */
+  border-radius: 10px; /* Apply rounded corners to the cell */
+  overflow: hidden; /* Ensure the button's rounded corners are not clipped */
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.pagination button {
+  padding: 10px 20px;
+  margin: 0 5px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+/* WebKit browsers (Chrome, Safari) */
+.table-container::-webkit-scrollbar {
+  width: 12px;
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Stylesheets/dashboard.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"
+        integrity="sha512-r22gChDnGvBylk90+2e/ycr3RVrDi8DIOkIGNhJlKfuyQM4tIRAI062MaV8sfjQKYVGjOBaZBOA87z+IhZE9DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/javascript/dashScript.js" defer></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="sidebar" id="sidebar">
+        <img src="https://lh3.google.com/u/0/d/1wIB_1D4L6Mz5GItMd_bAnnnQ8KMLaELw=w1830-h1632-iv1" alt="logo" id="logo">
+        <a href="" class="closebtn" id="closeNav">&times;</a>
+        <a href="" class="dashBoard" id="openDash">Tracking System</a>
+        <a href="" id="signout">Logout</a>
+    </div>
+
+    <div id="main">
+        <div class="header">
+            <span id="menu" style="font-size:30px;cursor:pointer">&#9776; Menu</span>
+            <div id="search-bar">
+                <form action="" method="post">
+                    <input id="searchVal" type="text" placeholder="Search by Business Name..." name="businessName"
+                        required>
+                    <button id="search" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+        <div class="greeting" id="message">
+        </div>
+        <div id="tbl-body" style="display: none;">
+            <form id="tbl-form" action="">
+                <div class="table-container">
+                    <table>
+                        <thead id="tbl-frm-head">
+                        </thead>
+                        <tbody id="tbl-frm-body">
+                        </tbody>
+                    </table>
+                </div>
+                <!-- <div class="pagination">
+                    <button id="prevPage" disabled>Previous</button>
+                    <span id="pageInfo"></span>
+                    <button id="nextPage">Next</button>
+                </div> -->
+            </form>
+            <input type="file" id="file-Input"></input>
+        </div>
+        <div class="footer" id="foot">
+            This is a thesis project. &copy; 2025 by Sariaya Institute. All rights reserved.
+        </div>
+    </div>
+</body>
+
+</html>
