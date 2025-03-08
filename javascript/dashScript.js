@@ -256,6 +256,7 @@ function handleEdit(event) {
         <td>
             <button class="save-edit-button">Save</button>
             <button class="cancel-edit-button">Cancel</button>
+            <button class="delete-row-button">Delete</button>
         </td>
     `;
 }
