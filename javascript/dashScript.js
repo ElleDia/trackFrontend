@@ -256,7 +256,6 @@ function handleEdit(event) {
         <td>
             <button class="save-edit-button">Save</button>
             <button class="cancel-edit-button">Cancel</button>
-            <button class="delete-row-button">Delete</button>
         </td>
     `;
 }
@@ -332,6 +331,7 @@ function handleCancel(event) {
         <td>${year}</td>
         <td></td>
         <td><button class="edit-row-button">Edit</button></td>
+        <button class="delete-row-button">Delete</button>
     `;
 }
 
