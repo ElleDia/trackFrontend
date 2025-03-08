@@ -26,6 +26,9 @@ function userLogin() {
         //Push the user over to the next page.
         window.open('dashboard.html', '_self');
     }
+    else{
+        alert("Invalid username or password.");
+    }
 }
 
 Date.prototype.addHours = function(h) {    
