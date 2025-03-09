@@ -186,13 +186,14 @@ function generateRow(record) {
     let row = '';
     if (record.length > 0) {
         record.forEach(function (item) {
+            var stringdate = item.entryDate.toString();
             row += `<tr data-id="${item._id}">
                 <td>${item.businessName}</td>
                 <td>${item.businessLocation}</td>
                 <td>${item.owner}</td>
                 <td>${item.code}</td> 
                 <td>${item.year}</td>
-                <td>${item.entryDate}</td>
+                <td>${formatDateToMMDDYYYYHHMMss(stringdate)}</td>
                 <td>
                 <button class="edit-row-button">Edit</button>
                 <button class="delete-row-button">Delete</button>
@@ -211,6 +212,35 @@ function generateRow(record) {
     // document.getElementById("pageInfo").innerText = `Page ${page} of ${Math.ceil(records.length / rowsPerPage)}`;
     // document.getElementById("prevPage").disabled = page === 1;
     // document.getElementById("nextPage").disabled = end >= records.length;
+}
+
+function formatDateToMMDDYYYYHHMMss(dateString) {
+    const date = new Date(dateString);
+    const padZero = (num) => (num < 10 ? '0' + num : num);
+
+    const month = padZero(date.getMonth() + 1); // Months are zero-based
+    const day = padZero(date.getDate());
+    const year = date.getFullYear();
+    const hours = padZero(date.getHours());
+    const minutes = padZero(date.getMinutes());
+    const seconds = padZero(date.getSeconds());
+
+    return `${month}/${day}/${year} ${hours}:${minutes}:${seconds}`;
+}
+
+function formatDateToMMDDYYYYHHMMSS(dateString) {
+    const date = new Date(dateString);
+
+    const pad = (num) => num.toString().padStart(2, '0');
+
+    const mm = pad(date.getMonth() + 1);
+    const dd = pad(date.getDate());
+    const yyyy = date.getFullYear();
+    const hh = pad(date.getHours());
+    const min = pad(date.getMinutes());
+    const ss = pad(date.getSeconds());
+
+    return `${mm}/${dd}/${yyyy} ${hh}:${min}:${ss}`;
 }
 
 function generateHeader() {
@@ -406,7 +436,7 @@ async function loadtable() {
         const response = await fetch(baseUrl + '/dashBoard/startTable');
         const records = await response.json();
         generateRow(records);
-    } catch (err) {
+    } catch (err) {a
         console.log(err);
     }
     console.log(data);
