@@ -23,15 +23,20 @@
     <div id="main">
         <div class="header">
             <span id="menu" style="font-size:30px;cursor:pointer">&#9776; Menu</span>
+            <h2 class="logoTitle">Tracking Management System</h2>
             <div id="search-bar">
                 <form action="" method="post">
-                    <input id="searchVal" type="text" placeholder="Search by Business Name..." name="businessName"
-                        required>
+                    <input id="searchVal" type="text" placeholder="Search..." name="businessName" required>
                     <button id="search" type="submit">Search</button>
                 </form>
             </div>
         </div>
-        <div class="greeting" id="message">
+        <div class="greeting" id="message"></div>
+        <div class="content" id = "introContent" style="display: body;">
+            <h1>About <span>US</span>?</h1>
+            <p class="par"> A digital tracking system in the MPDI enhances
+                efficiency by <br> document management,ensuring quick retrieval,<br>
+                transparency, and accountability.</p>
         </div>
         <div id="tbl-body" style="display: none;">
             <form id="tbl-form" action="">
@@ -49,9 +54,9 @@
                     <button id="nextPage">Next</button>
                 </div> -->
             </form>
-            <input type="file" id="file-Input"></input>
+            <!-- <input type="file" id="file-Input"></input> -->
         </div>
-        <div class="footer" id="foot">
+        <div class="footer" id="footer">
             This is a thesis project. &copy; 2025 by Sariaya Institute. All rights reserved.
         </div>
     </div>

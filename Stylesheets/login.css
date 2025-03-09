@@ -5,8 +5,10 @@ body {
   height: 100vh;
   margin: 0;
   font-family: 'Arial', sans-serif;
-  background: linear-gradient(135deg, #f9f9fb, git#a89cef, #050556);
-  
+  /* background: linear-gradient(135deg, #f9f9fb, git#a89cef, #050556); */
+  background: linear-gradient(100deg, #e0dad8,#b7bfff, #010a4c); /* Example gradient colors */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 /* section .color{
   position: fixed ;
@@ -43,35 +45,34 @@ section .color:nth-child(4){
 }  */
 
 .container {
-  position: relative;
+  /* position: fixed;
   width: 400px;
   height: 500px;
   display: flex;
+  left: 500px;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 }
 
 .glassmorphism-box {
-  position: relative;
-  width: 100%;
-  height: 100%;
+  align-content: center;
+  position: fixed;
+  right: 100px;
+  bottom: 150px;
+  width: 360px;
+  height: 500px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 15px;
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
   padding: 20px;
-  display: flex;
-  position: relative;
-  left:600px;
-  background-color: #070129;
+  background-color: #0f0643;
   background-image: url("https://lh3.google.com/u/0/d/1xkq05tycdJq9fyYVUOH4-d5cz4KR7hnf=w1830-h1632-iv1"); 
-  background-size: 400px; 
+  background-size: 370px; 
   background-position: center; 
-  background-position-x: 0px;
+  background-position-x: 25px;
+  background-blend-mode:luminosity;
   background-position-y: -40px;
   /* background-height: 100vh; */
   background-repeat: no-repeat; 
@@ -92,6 +93,7 @@ form {
 }
 
 h1 {
+  position: relative;
   font-weight: bold;
   margin-bottom: 20px;
   color: #ffffff;
@@ -116,9 +118,9 @@ input:focus {
   background-color: rgba(255, 255, 255, 0.3);
 }
 h1{
-  position: relative;
-  top: 60px;
-  right: 130px;
+  position: fixed;
+  top: 180px;
+  right: 270px;
 }
 button {
   position: relative;
@@ -147,13 +149,16 @@ button:focus {
 
 #logo {
   width: 500px; /* Adjust the width as needed */
-  position: relative;
+  position: fixed;
+  left: 250px;
   /* bottom: 330px; */
   height: 450px;
   margin-top: 3px;
   right: 500px;
   /* margin-bottom: 100px; */
   mix-blend-mode: multiply;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 
 .footer {

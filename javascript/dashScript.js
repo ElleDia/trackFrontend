@@ -2,6 +2,8 @@
 
 let baseUrl = null;
 let tableVisibility = null;
+let contentVisibility = null;
+let entryDate = null
 // import readXlsxFile from 'read-excel-file'
 // import * as XLSX from 'xlsx';
 
@@ -17,7 +19,7 @@ document.addEventListener('DOMContentLoaded', event => {
         window.open("login.html", "_self");
     }
     tableVisibility = document.getElementById("tbl-body");
-
+    contentVisibility = document.getElementById("introContent");
     var greeting = document.querySelector('.greeting');
     var h1Tag = document.createElement('H1');
     h1Tag.innerHTML = "Welcome, " + "User";
@@ -37,10 +39,6 @@ document.addEventListener('DOMContentLoaded', event => {
     document.getElementById("tbl-frm-body").addEventListener("click", handleTableClick);
     // document.getElementById("prevPage").addEventListener("click", prevPage);
     // document.getElementById("nextPage").addEventListener("click", nextPage);
-    var input = document.getElementById("file-Input")
-    input.addEventListener('change', async(event) => {
-        await pullRecords(event);
-    });
 });
 // async function readXlsxFile(event) {
 //     const input = event.target.files[0];
@@ -79,10 +77,19 @@ function logout(event) {
 }
 
 function openNav(event) {
-    event.preventDefault();
-    document.getElementById("sidebar").style.width = "250px";
-    document.getElementById("main").style.marginLeft = "250px";
-    document.querySelector("footer").style.marginLeft = "250px";
+    var isOpen = false
+    if(!isOpen){
+        event.preventDefault();
+        document.getElementById("sidebar").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+        document.getElementById("footer").style.marginLeft = "10px";
+        isOpen = true;
+    }
+    else{
+        isOpen = false;
+        closeNav(event);
+    }
+
 }
 
 function closeNav(event) {
@@ -95,8 +102,10 @@ function closeNav(event) {
 function openDashboard(event) {
     event.preventDefault();
     if (tableVisibility.style.display === "block") {
+        contentVisibility.style.display = "block";
         tableVisibility.style.display = "none";
     } else {
+        contentVisibility.style.display = "none";
         loadtable();
         tableVisibility.style.display = "block";
     }
@@ -244,7 +253,7 @@ function handleEdit(event) {
     const owner = row.children[2].innerText;
     const code = row.children[3].innerText;
     const year = row.children[4].innerText;
-    const entryDate = row.children[5].innerText;
+    entryDate = row.children[5].innerText;
 
     row.innerHTML = `
         <td><input class="name" type="text" value="${businessName}" required></td>
@@ -252,7 +261,7 @@ function handleEdit(event) {
         <td><input class="owner" type="text" value="${owner}" required></td>
         <td><input class="code" type="text" value="${code}" required></td>
         <td><input class="year" type="number" value="${year}" required></td>
-        <td></td>
+        <td><input type="hidden" value =${entryDate}</td>
         <td>
             <button class="save-edit-button">Save</button>
             <button class="cancel-edit-button">Cancel</button>
@@ -320,8 +329,8 @@ function handleCancel(event) {
     const businessLocation = row.querySelector('input[type="text"]').value;
     const owner = row.querySelector('input[type="text"]').value;
     const code = row.querySelector('input[type="text"]').value;
-    const year = row.querySelector('input[type="number"]').value;
-    const entryDate = row.children[5].innerText;
+    const year = row.querySelector('input[type="text"]').value;
+    const enrolledDate = row.querySelector('input[type="hidden"]').value;
 
     row.innerHTML = `
         <td>${businessName}</td>
@@ -329,9 +338,10 @@ function handleCancel(event) {
         <td>${owner}</td>
         <td>${code}</td>
         <td>${year}</td>
-        <td></td>
-        <td><button class="edit-row-button">Edit</button></td>
+        <td>${enrolledDate}</td>        
+        <td><button class="edit-row-button">Edit</button>
         <button class="delete-row-button">Delete</button>
+        </td>
     `;
 }
 
@@ -344,7 +354,7 @@ function addData() {
         <td><input type="text" placeholder="Owner" required></td>
         <td><input type="text" placeholder="Code" required></td>
         <td><input type="text" placeholder="Year" required></td>
-        <td></td>
+        <td type="number" ></td>
         <td>
             <button class="save-row-button">Save</button>
             <button class="cancel-row-button">Cancel</button>

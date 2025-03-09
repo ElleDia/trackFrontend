@@ -8,18 +8,25 @@ body {
 
 
 body::before {
+  background: linear-gradient(to top,rgba(0,0,0,0.5)50%);
   background-image: url('https://lh3.google.com/u/0/d/1P_sXhxMgKPTofYoDTpA0C9dbIBVhqhAu=w1830-h1632-iv1');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100vw 100vh;
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-size: 100vw 100vh;
-  background-position: center;
-  background-repeat: no-repeat;
   filter: blur(5px);
   z-index: -1;
+}
+
+.logoTitle{
+  padding-top: 5px;
+  color: whitesmoke;
+  font-size: 30px;
 }
 
 .sidebar {
@@ -29,7 +36,7 @@ body::before {
   z-index: 1;
   top: 0;
   left: 0;
-  background: linear-gradient(135deg, rgba(1, 5, 40, 0.9), rgba(4, 7, 10, 0.7));
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(2, 21, 41, 0.7));
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
   overflow-x: hidden;
   transition: 0.5s;
@@ -54,7 +61,9 @@ body::before {
   display: block;
   transition: 0.3s;
 }
-
+menu:hover {
+  color: #4d6bf4;
+}
 .sidebar a:hover {
   color: #f1f1f1;
 }
@@ -72,17 +81,55 @@ body::before {
   transition: margin-left .5s;
   padding: 16px;
 }
-
+.greeting{
+  color: rgb(7, 2, 89);
+  font-size: 20px;
+  padding-left: 10px;
+}
 .header {
-  background-color: #011830;
-  color: white;
+  align-self: auto;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(2, 21, 41, 0.7));
+  /* color: rgb(255, 255, 255); */
   padding: 20px;
+  color: rgb(255, 255, 255);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(37, 56, 68, 0.5);
 }
-
+.logoTitle{
+  color: rgb(215, 143, 9);
+}
+.content{
+  width: 1200px;
+  height: auto;
+  margin: 0px;
+  color: gb(7, 2, 89);
+  position: relative;
+}
+.content h1{
+  font-size: 70px;
+  font-weight: bold;
+  margin: 0;
+  color:rgb(7, 2, 89) ;
+  font-family: 'Times New Roman', Times, serif;
+  padding-left: 10px;
+  padding-bottom: 25px;
+}
+.content span{
+  color: rgb(215, 143, 9);
+}
+.content .par{
+  margin: 0px;
+  font-size: 20px;
+  letter-spacing: 1px;
+  line-height: 30px;
+  /* font-weight: bold; */
+  color:rgb(7, 2, 89) ;
+  font-family: Arial;
+  padding-left: 20px;
+  padding-bottom: 25px;
+}
 .search-bar {
   flex-grow: 1;
   margin: 0 20px;
@@ -172,15 +219,19 @@ td:last-child {
 }
 
 .footer {
-  background-color: rgba(241, 241, 241, 0.5); /* Semi-transparent background */
-  color: #333;
+  /* background-color: rgba(241, 241, 241, 0.5); Semi-transparent background */
+  background: linear-gradient(100deg, rgba(151, 149, 149, 0.5),rgb(207, 106, 5), rgba(221, 134, 4, 0.7));
+  height: 50px;
+  color: whitesmoke;
+  bottom: 500px;
   text-align: center;
-  right: 3px;
+  right: 10px;
   padding: 10px 10px;
   position: relative;
-  top: 618px;
+  top: 298px;
   width: 100%;
-  bottom: 0;
+
+  position-anchor: inherit;
 }
 
 
