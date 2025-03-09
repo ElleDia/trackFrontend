@@ -290,7 +290,7 @@ function handleEdit(event) {
         <td><input class="location" type="text" value="${businessLocation}" required></td>
         <td><input class="owner" type="text" value="${owner}" required></td>
         <td><input class="code" type="text" value="${code}" required></td>
-        <td><input class="year" type="number" value="${year}" required></td>
+        <td><input class="year" type="date" value="${year}" required></td>
         <td><input type="hidden" value =${entryDate}</td>
         <td>
             <button class="save-edit-button">Save</button>
