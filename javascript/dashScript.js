@@ -78,14 +78,14 @@ function logout(event) {
 
 function openNav(event) {
     var isOpen = false
-    if(!isOpen){
+    if (!isOpen) {
         event.preventDefault();
         document.getElementById("sidebar").style.width = "250px";
         document.getElementById("main").style.marginLeft = "250px";
         document.getElementById("footer").style.marginLeft = "10px";
         isOpen = true;
     }
-    else{
+    else {
         isOpen = false;
         closeNav(event);
     }
@@ -376,6 +376,7 @@ function handleCancel(event) {
 }
 
 function addData() {
+    event.preventDefault()
     const tableBody = document.querySelector('tbody');
     const newRow = document.createElement('tr');
     newRow.innerHTML = `
@@ -383,7 +384,7 @@ function addData() {
         <td><input type="text" placeholder="Business Location" required></td>
         <td><input type="text" placeholder="Owner" required></td>
         <td><input type="text" placeholder="Code" required></td>
-        <td><input type="text" placeholder="Year" required></td>
+        <td><input type="date" placeholder="Year" required></td>
         <td type="number" ></td>
         <td>
             <button class="save-row-button">Save</button>
@@ -396,13 +397,17 @@ function addData() {
     const cancelButton = newRow.querySelector('.cancel-row-button');
 
     saveButton.addEventListener('click', async () => {
+        const tableBody = document.querySelector('tbody');
+        event.preventDefault()
+        const row = event.target.closest('tr');
         const businessName = newRow.querySelector('input[placeholder="Business Name"]').value;
         const businessLocation = newRow.querySelector('input[placeholder="Business Location"]').value;
         const owner = newRow.querySelector('input[placeholder="Owner"]').value;
         const code = newRow.querySelector('input[placeholder="Code"]').value;
         const year = newRow.querySelector('input[placeholder="Year"]').value;
-
-        const response = await fetch(baseUrl + '/dashboard/save', {
+        // const enrolledDate = new Date().toString();
+        const enrolledDate = formatDateToMMDDYYYYHHMMss(new Date().toString());
+        const res = await fetch(baseUrl + '/dashboard/save', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -415,14 +420,19 @@ function addData() {
                 year
             })
         });
-
-        if (response.ok) {
-            alert('Data saved successfully!');
-            await loadtable();
-            tableVisibility.style.display = "block";
-        } else {
-            alert('Failed to save data.');
-        }
+        getResults(res);
+        row.innerHTML = `
+          <td>${businessName}</td>
+        <td>${businessLocation}</td>
+        <td>${owner}</td>
+        <td>${code}</td>
+        <td>${year}</td>
+        <td>${enrolledDate}</td>        
+        <td><button class="edit-row-button">Edit</button>
+        <button class="delete-row-button">Delete</button>
+        </td>
+    `;
+        // tableBody.appendChild(row);
     });
 
     cancelButton.addEventListener('click', () => {
@@ -436,16 +446,16 @@ async function loadtable() {
         const response = await fetch(baseUrl + '/dashBoard/startTable');
         const records = await response.json();
         generateRow(records);
-    } catch (err) {a
+    } catch (err) {
         console.log(err);
     }
     console.log(data);
 }
 
 async function handleDelete(event) {
-
+    event.preventDefault();
     if (!confirm('Are you sure?')) {
-        e.preventDefault();
+        return;
     }
     const row = event.target.closest('tr');
     const _id = row.getAttribute('data-id');
@@ -459,12 +469,8 @@ async function handleDelete(event) {
         body: JSON.stringify({ _id, businessName })
     };
     const res = await fetch(baseUrl + '/dashboard/delete', options)
-    if (!res.ok) {
-        alert('Failed to delete record');
-        throw new Error(`HTTP error! status: ${res.status}`);
-    }
-    else {
-        alert('Record deleted successfully');
+    if (getResults(res)) {
+        row.remove(); // Remove the row from the table   
     }
     // const result = await res.json();
     // if (result.success) {
@@ -486,4 +492,36 @@ function nextPage() {
         currentPage++;
         displayTable(records, currentPage);
     }
+}
+function getResults(res) {
+    var result = false;
+    switch (res.status) {
+        case 200:
+            alert('Database connection established');
+            result = true;
+            break;
+        case 400:
+            alert('Bad Request: Please check the data you provided.');
+            break;
+        case 401:
+            alert('Unauthorized: Please log in.');
+            break;
+        case 403:
+            alert('Forbidden: You do not have permission to perform this action.');
+            break;
+        case 404:
+            alert('Not Found: The record could not be found.');
+            break;
+        case 500:
+            alert('Internal Server Error: Please try again later.');
+            break;
+        default:
+            alert(`Unexpected error: ${res.status}`);
+            break;
+    }
+
+    if (!res.ok) {
+        return false;
+    }
+    return result;
 }
