@@ -14,6 +14,11 @@ function userLogin() {
     var user = document.getElementById("signInUsername").value;
     var password = document.getElementById("signInPassword").value;
     if (user == "admin" && password == "admin") {
+        // const res = fetch(baseUrl + '/app/checkConnection')
+        // if (res.status !== 200) {
+        //     alert("Not authorized to access Site. Please contact admin!");
+        //     return;
+        // }
         //Set the authentication state to authenticated.
         sessionStorage.setItem("AuthenticationState", "Authenticated");
 

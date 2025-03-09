@@ -8,8 +8,8 @@ let entryDate = null
 // import * as XLSX from 'xlsx';
 
 document.addEventListener('DOMContentLoaded', event => {
-    // baseUrl = 'http://localhost:3000';
-    baseUrl = 'https://trackbackend-3c7y.onrender.com'
+    baseUrl = 'http://localhost:3000';
+    // baseUrl = 'https://trackbackend-3c7y.onrender.com'
 
     if (sessionStorage.getItem('AuthenticationState') === null) {
         window.open("login.html", "_self");
@@ -193,6 +193,7 @@ function generateRow(record) {
                 <td>${item.owner}</td>
                 <td>${item.code}</td> 
                 <td>${item.year}</td>
+                <td>${item.storage}</td>
                 <td>${formatDateToMMDDYYYYHHMMss(stringdate)}</td>
                 <td>
                 <button class="edit-row-button">Edit</button>
@@ -255,6 +256,7 @@ function generateHeader() {
         <th>Owner</th>
         <th>Code</th>
         <th>Year</th>
+        <th>storage</th>
         <th>Entry Date</th>
         <th>Action</th>
     </tr>`;
@@ -291,6 +293,7 @@ function handleEdit(event) {
         <td><input class="owner" type="text" value="${owner}" required></td>
         <td><input class="code" type="text" value="${code}" required></td>
         <td><input class="year" type="date" value="${year}" required></td>
+        <td><input class="storage" type="date" value="${storage}" required></td>
         <td><input type="hidden" value =${entryDate}</td>
         <td>
             <button class="save-edit-button">Save</button>
@@ -315,6 +318,7 @@ async function handleSave(event) {
     const owner = row.querySelector('.owner').value;
     const code = row.querySelector('.code').value;
     const year = row.querySelector('.year').value;
+    const storage = row.querySelector('.storage').value;
 
     // const entryDate = row.children[5].innerText;
     // const updatedData = {
@@ -338,7 +342,8 @@ async function handleSave(event) {
                 businessLocation,
                 owner,
                 code,
-                year
+                year,
+                storage
             })
         });
         if (res.ok) {
@@ -352,6 +357,7 @@ async function handleSave(event) {
     catch (error) {
         console.error('Error:', error);
     }
+    loadtable();
 }
 function handleCancel(event) {
     const row = event.target.closest('tr');
@@ -360,6 +366,7 @@ function handleCancel(event) {
     const owner = row.querySelector('input[type="text"]').value;
     const code = row.querySelector('input[type="text"]').value;
     const year = row.querySelector('input[type="text"]').value;
+    const storage = row.querySelector('input[type="text"]').value;
     const enrolledDate = row.querySelector('input[type="hidden"]').value;
 
     row.innerHTML = `
@@ -385,7 +392,8 @@ function addData() {
         <td><input type="text" placeholder="Owner" required></td>
         <td><input type="text" placeholder="Code" required></td>
         <td><input type="date" placeholder="Year" required></td>
-        <td type="number" ></td>
+        <td><input type="string" placeholder="storage" required></td>
+        <td></td>
         <td>
             <button class="save-row-button">Save</button>
             <button class="cancel-row-button">Cancel</button>
@@ -405,6 +413,7 @@ function addData() {
         const owner = newRow.querySelector('input[placeholder="Owner"]').value;
         const code = newRow.querySelector('input[placeholder="Code"]').value;
         const year = newRow.querySelector('input[placeholder="Year"]').value;
+        const storage = newRow.querySelector('input[placeholder="storage"]').value;
         // const enrolledDate = new Date().toString();
         const enrolledDate = formatDateToMMDDYYYYHHMMss(new Date().toString());
         const res = await fetch(baseUrl + '/dashboard/save', {
@@ -417,20 +426,34 @@ function addData() {
                 businessLocation,
                 owner,
                 code,
-                year
+                year,
+                storage
             })
         });
         getResults(res);
-        row.innerHTML = `
-          <td>${businessName}</td>
-        <td>${businessLocation}</td>
-        <td>${owner}</td>
-        <td>${code}</td>
-        <td>${year}</td>
-        <td>${enrolledDate}</td>        
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ businessName: businessName, code: code })
+        };
+        const response = await fetch(baseUrl + '/dashboard/getData', options);
+
+        const records = await response.json();
+        row.innerHTML = 
+        `<tr data-id="${records._id}">
+        <td>${records.businessName}</td>
+        <td>${records.businessLocation}</td>
+        <td>${records.owner}</td>
+        <td>${records.code}</td>
+        <td>${records.year}</td>
+        <td>${records.storage}</td>
+        <td>${records.enrolledDate}</td>        
         <td><button class="edit-row-button">Edit</button>
         <button class="delete-row-button">Delete</button>
         </td>
+        <tr>
     `;
         // tableBody.appendChild(row);
     });

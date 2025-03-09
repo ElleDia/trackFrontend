@@ -3,11 +3,29 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   height: 100vh;
+  width: 100vw;
   overflow: hidden;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 50%);
 }
 
 
 body::before {
+  background: linear-gradient(to top,rgba(0,0,0,0.5)50%);
+  background-image: url('https://lh3.google.com/u/0/d/1P_sXhxMgKPTofYoDTpA0C9dbIBVhqhAu=w1830-h1632-iv1');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100vw 100vh;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  filter: blur(5px);
+  z-index: -1;
+}
+
+body::after {
   background: linear-gradient(to top,rgba(0,0,0,0.5)50%);
   background-image: url('https://lh3.google.com/u/0/d/1P_sXhxMgKPTofYoDTpA0C9dbIBVhqhAu=w1830-h1632-iv1');
   background-position: center;
@@ -223,15 +241,12 @@ td:last-child {
   background: linear-gradient(100deg, rgba(151, 149, 149, 0.5),rgb(207, 106, 5), rgba(221, 134, 4, 0.7));
   height: 50px;
   color: whitesmoke;
-  bottom: 500px;
-  text-align: center;
+  bottom: 0px;
   right: 10px;
   padding: 10px 10px;
-  position: relative;
-  top: 298px;
+  position: fixed;
+  text-align: center;
   width: 100%;
-
-  position-anchor: inherit;
 }
 
 
