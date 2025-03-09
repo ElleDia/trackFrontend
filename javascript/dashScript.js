@@ -285,7 +285,8 @@ function handleEdit(event) {
     const owner = row.children[2].innerText;
     const code = row.children[3].innerText;
     const year = row.children[4].innerText;
-    entryDate = row.children[5].innerText;
+    const storage = row.children[5].innerText;
+    entryDate = row.children[6].innerText;
 
     row.innerHTML = `
         <td><input class="name" type="text" value="${businessName}" required></td>
