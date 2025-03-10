@@ -459,7 +459,7 @@ function addData() {
         const enrolledDate = formatDateToMMDDYYYYHHMMss(new Date().toString());
 
         if (!businessName || !businessLocation || !owner || !code || !year || !storage) {
-            alert('All fields are required. Please fill in all the fields.');
+            alert('All fields are required. Please fill in all the fields.');            
             return;
         }
 
@@ -478,6 +478,10 @@ function addData() {
             })
         });
         getResults(res);
+        if(res.status ==  "400" || res.status ==  "405" || res.status ==  "406"){
+            tableBody.removeChild(newRow);
+            return;
+        }
         const options = {
             method: 'POST',
             headers: {
