@@ -8,8 +8,8 @@ let entryDate = null
 // import * as XLSX from 'xlsx';
 
 document.addEventListener('DOMContentLoaded', event => {
-    // baseUrl = 'http://localhost:3000';
-    baseUrl = 'https://trackbackend-3c7y.onrender.com'
+    baseUrl = 'http://localhost:3000';
+    // baseUrl = 'https://trackbackend-3c7y.onrender.com'
 
     if (sessionStorage.getItem('AuthenticationState') === null) {
         window.open("login.html", "_self");
@@ -412,7 +412,7 @@ function addData() {
         <td><input type="text" placeholder="Owner" required></td>
         <td><input type="text" placeholder="Code" required></td>
         <td><input type="date" placeholder="Year" required></td>
-        <td><input type="string" placeholder="storage" required></td>
+        <td><input type="text" placeholder="Storage" required></td>
         <td></td>
         <td>
             <button class="save-row-button">Save</button>
@@ -433,9 +433,15 @@ function addData() {
         const owner = newRow.querySelector('input[placeholder="Owner"]').value;
         const code = newRow.querySelector('input[placeholder="Code"]').value;
         const year = newRow.querySelector('input[placeholder="Year"]').value;
-        const storage = newRow.querySelector('input[placeholder="storage"]').value;
+        const storage = newRow.querySelector('input[placeholder="Storage"]').value;
         // const enrolledDate = new Date().toString();
         const enrolledDate = formatDateToMMDDYYYYHHMMss(new Date().toString());
+
+        if (!businessName || !businessLocation || !owner || !code || !year || !storage) {
+            alert('All fields are required. Please fill in all the fields.');
+            return;
+        }
+
         const res = await fetch(baseUrl + '/dashboard/save', {
             method: 'POST',
             headers: {
@@ -544,6 +550,9 @@ function getResults(res) {
             break;
         case 404:
             alert('Not Found: The record could not be found.');
+            break;
+        case 405:
+            alert('Duplicate enrollment: Business already exists');
             break;
         case 500:
             alert('Internal Server Error: Please try again later.');
