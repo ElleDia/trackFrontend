@@ -2,6 +2,7 @@
 
 let baseUrl = null;
 let tableVisibility = null;
+
 let contentVisibility = null;
 let entryDate = null
 // import readXlsxFile from 'read-excel-file'
@@ -30,6 +31,7 @@ document.addEventListener('DOMContentLoaded', event => {
     // document.getElementById("openDash").addEventListener("click", openDashboard);
     // document.getElementById("search").addEventListener("click", searchTable);
     // document.getElementById("tbl-frm-body").addEventListener("click", handleTableClick);
+    document.getElementById("enrollBtn").addEventListener('click', addData);
 
     document.getElementById("menu").addEventListener("click", openNav);
     document.getElementById("closeNav").addEventListener("click", closeNav);
@@ -82,7 +84,7 @@ function openNav(event) {
         event.preventDefault();
         document.getElementById("sidebar").style.width = "250px";
         document.getElementById("main").style.marginLeft = "250px";
-        document.getElementById("footer").style.marginLeft = "10px";
+        document.getElementById("footer").style.marginLeft = "250px";
         isOpen = true;
     }
     else {
@@ -100,13 +102,16 @@ function closeNav(event) {
 }
 
 function openDashboard(event) {
+    const enrollVisibility = document.getElementById("enrollBtn");
     event.preventDefault();
     if (tableVisibility.style.display === "block") {
         contentVisibility.style.display = "block";
         tableVisibility.style.display = "none";
+        enrollVisibility.style.display = "none";
     } else {
         contentVisibility.style.display = "none";
         loadtable();
+        enrollVisibility.style.display = "block";
         tableVisibility.style.display = "block";
     }
 }
@@ -263,10 +268,10 @@ function formatDateToMMDDYYYYHHMMSS(dateString) {
 }
 
 function generateHeader() {
-    var header = `<tr class="sticky-row-1">
-        <td colspan="8">
-            <button id="Enroll" class="newRow">Enroll Business</button>
-        </td>
+    var headerOld = `<tr class="sticky-row-1">
+        // <td colspan="8">
+        //     <button id="Enroll" class="newRow">Enroll Business</button>
+        // </td>
     </tr>
     <tr class="sticky-row-2">
         <th>Business Name</th>
@@ -278,10 +283,26 @@ function generateHeader() {
         <th>Entry Date</th>
         <th>Action</th>
     </tr>`;
+
+    var header = `<tr class="sticky-row-1" id="tbl-frm-head" >
+    <thead>
+    <tr>
+    <tr class="sticky-row-2">
+    <th>Business Name</th>
+    <th>Business Location</th>
+    <th>Owner</th>
+    <th>Code</th>
+    <th>Year</th>
+    <th>storage</th>
+    <th>Entry Date</th>
+    <th>Action</th>
+    </tr>
+    </thead>`;
+
     var tableHead = document.getElementById("tbl-frm-head");
     tableHead.innerHTML = header;
-    const addButton = tableHead.querySelector('.newRow');
-    addButton.addEventListener('click', addData);
+    // const addButton = tableHead.querySelector('.newRow');
+    // addButton.addEventListener('click', addData);
 }
 
 function handleTableClick(event) {

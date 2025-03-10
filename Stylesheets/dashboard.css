@@ -12,9 +12,11 @@ body {
   height: 100vh;
   margin: 0;
   padding: 0;
+  overflow: hidden;
   backdrop-filter: blur(5px);
   position: relative;
   z-index: -1;
+
 }
 
 
@@ -187,12 +189,18 @@ table {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   overflow: hidden;
+  position: relative;
 }
-
+thead{
+  position: sticky;
+  top: 0;
+}
 th {
+  position: sticky;
   background-color: #021830;
   color: white;
   padding: 10px;
+  top: 0;
   text-align: left;
   border: 1px solid #ddd;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -209,7 +217,6 @@ td {
 tbody tr:nth-child(even) {
   background: rgba(255, 255, 255, 0.2);
 }
-
 tbody tr:hover {
   background: rgba(0, 123, 255, 0.1);
 }
@@ -229,7 +236,7 @@ td:last-child {
 .footer {
   /* background-color: rgba(241, 241, 241, 0.5); Semi-transparent background */
   background: linear-gradient(100deg, rgba(151, 149, 149, 0.5), rgb(207, 106, 5), rgba(221, 134, 4, 0.7));
-  height: 50px;
+  height: 45px;
   color: whitesmoke;
   bottom: 0px;
   right: 10px;
@@ -239,7 +246,20 @@ td:last-child {
   width: 100%;
 }
 
-
+#enrollBtn{
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 1.0);
+  color: rgb(1, 4, 63);
+  font-weight: bold;
+  width: 100%;
+  height: 50px;
+  /* height: fit-content; */
+font-size: large;
+}
+#enrollBtn:hover {
+  background-color: #06023d;
+  color: whitesmoke;
+}
 
 .newRow {
   width: 100%;
