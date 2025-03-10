@@ -8,8 +8,8 @@ let entryDate = null
 // import * as XLSX from 'xlsx';
 
 document.addEventListener('DOMContentLoaded', event => {
-    // baseUrl = 'http://localhost:3000';
-    baseUrl = 'https://trackbackend-3c7y.onrender.com'
+    baseUrl = 'http://localhost:3000';
+    // baseUrl = 'https://trackbackend-3c7y.onrender.com'
 
     if (sessionStorage.getItem('AuthenticationState') === null) {
         window.open("login.html", "_self");
@@ -553,6 +553,9 @@ function getResults(res) {
             break;
         case 405:
             alert('Duplicate enrollment: Business already exists');
+            break;
+        case 406:
+            alert('code already exists');
             break;
         case 500:
             alert('Internal Server Error: Please try again later.');
