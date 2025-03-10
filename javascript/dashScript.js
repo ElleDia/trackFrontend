@@ -215,6 +215,24 @@ function generateRow(record) {
     // document.getElementById("nextPage").disabled = end >= records.length;
 }
 
+function newrow2(record) {
+    var stringdate = record.entryDate.toString();
+    row = `<tr data-id="${record._id}">
+        <td>${record.businessName}</td>
+        <td>${record.businessLocation}</td>
+        <td>${record.owner}</td>
+        <td>${record.code}</td> 
+        <td>${record.year}</td>
+        <td>${record.storage}</td>
+        <td>${formatDateToMMDDYYYYHHMMss(stringdate)}</td>
+        <td>
+        <button class="edit-row-button">Edit</button>
+        <button class="delete-row-button">Delete</button>
+        </td>
+        </tr>`;
+    return row;
+}
+
 function formatDateToMMDDYYYYHHMMss(dateString) {
     const date = new Date(dateString);
     const padZero = (num) => (num < 10 ? '0' + num : num);
@@ -246,7 +264,7 @@ function formatDateToMMDDYYYYHHMMSS(dateString) {
 
 function generateHeader() {
     var header = `<tr class="sticky-row-1">
-        <td colspan="7">
+        <td colspan="8">
             <button id="Enroll" class="newRow">Enroll Business</button>
         </td>
     </tr>
@@ -376,6 +394,7 @@ function handleCancel(event) {
         <td>${owner}</td>
         <td>${code}</td>
         <td>${year}</td>
+        <td>${storage}</td>
         <td>${enrolledDate}</td>        
         <td><button class="edit-row-button">Edit</button>
         <button class="delete-row-button">Delete</button>
@@ -442,20 +461,9 @@ function addData() {
         const response = await fetch(baseUrl + '/dashboard/getData', options);
 
         const records = await response.json();
-        row.innerHTML = 
-        `<tr data-id="${records._id}">
-        <td>${records.businessName}</td>
-        <td>${records.businessLocation}</td>
-        <td>${records.owner}</td>
-        <td>${records.code}</td>
-        <td>${records.year}</td>
-        <td>${records.storage}</td>
-        <td>${records.enrolledDate}</td>        
-        <td><button class="edit-row-button">Edit</button>
-        <button class="delete-row-button">Delete</button>
-        </td>
-        <tr>
-    `;
+        // generateRow(records);
+        row.innerHTML = newrow2(records);
+        // <tr>
         // tableBody.appendChild(row);
     });
 
@@ -484,13 +492,14 @@ async function handleDelete(event) {
     const row = event.target.closest('tr');
     const _id = row.getAttribute('data-id');
     const businessName = row.children[0].innerText;
+    const code = row.children[3].innerText;
 
     const options = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ _id, businessName })
+        body: JSON.stringify({ _id, businessName, code })
     };
     const res = await fetch(baseUrl + '/dashboard/delete', options)
     if (getResults(res)) {
