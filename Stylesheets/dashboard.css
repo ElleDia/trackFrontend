@@ -1,4 +1,4 @@
-body {
+/* body {
   position: relative;
   margin: 0;
   font-family: Arial, sans-serif;
@@ -39,7 +39,27 @@ body::after {
   height: 100%;
   filter: blur(5px);
   z-index: -1;
+} */
+
+body {
+
+  /* background: linear-gradient(to top,rgba(0,0,0,0.5)50%); */
+  background-image: url('https://lh3.google.com/u/0/d/1P_sXhxMgKPTofYoDTpA0C9dbIBVhqhAu=w1830-h1632-iv1');
+  /* background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 50%), url('https://lh3.google.com/u/0/d/1P_sXhxMgKPTofYoDTpA0C9dbIBVhqhAu=w1830-h1632-iv1'); */
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 50%), url('https://lh3.google.com/u/0/d/1P_sXhxMgKPTofYoDTpA0C9dbIBVhqhAu=w1830-h1632-iv1');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* Ensure the background image covers the entire screen */
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  backdrop-filter: blur(5px);
+  position: relative;
+  z-index: -1;
 }
+
 
 .logoTitle{
   padding-top: 5px;
