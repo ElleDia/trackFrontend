@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', event => {
     // document.getElementById("search").addEventListener("click", searchTable);
     // document.getElementById("tbl-frm-body").addEventListener("click", handleTableClick);
     document.getElementById("enrollBtn").addEventListener('click', addData);
-
+    enrollVisibility = document.getElementById("enrollBtn");
     document.getElementById("menu").addEventListener("click", openNav);
     document.getElementById("closeNav").addEventListener("click", closeNav);
     document.getElementById("openDash").addEventListener("click", openDashboard);
