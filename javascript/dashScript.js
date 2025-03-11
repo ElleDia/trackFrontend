@@ -310,7 +310,7 @@ function generateHeader() {
 
 function handleTableClick(event) {
     if (event.target.classList.contains('edit-row-button')) {
-        handleEdit(event);
+        handleEdit(event);x
     } else if (event.target.classList.contains('save-edit-button')) {
         handleSave(event);
     } else if (event.target.classList.contains('cancel-edit-button')) {
@@ -323,6 +323,7 @@ function handleTableClick(event) {
 function handleEdit(event) {
     const row = event.target.closest('tr');
     const businessName = row.children[0].innerText;
+    businessName.readonly = true;
     const businessLocation = row.children[1].innerText;
     const owner = row.children[2].innerText;
     const code = row.children[3].innerText;
@@ -331,13 +332,13 @@ function handleEdit(event) {
     entryDate = row.children[6].innerText;
 
     row.innerHTML = `
-        <td><input class="name" type="text" value="${businessName}" required></td>
+        <td>${businessName}</td>
         <td><input class="location" type="text" value="${businessLocation}" required></td>
         <td><input class="owner" type="text" value="${owner}" required></td>
-        <td><input class="code" type="text" value="${code}" required></td>
+        <td>${code}</td>
         <td><input class="year" type="date" value="${year}" required></td>
-        <td><input class="storage" type="date" value="${storage}" required></td>
-        <td><input type="hidden" value =${entryDate}</td>
+        <td><input class="storage" type="text" value="${storage}" required></td>
+        <td>${entryDate}</td>
         <td>
             <button class="save-edit-button">Save</button>
             <button class="cancel-edit-button">Cancel</button>
@@ -346,6 +347,7 @@ function handleEdit(event) {
 }
 
 async function handleSave(event) {
+    event.preventDefault();
     const row = event.target.closest('tr');
     // const businessId = row.getattribute('_id');
     const _id = row.getAttribute('data-id');
@@ -356,10 +358,10 @@ async function handleSave(event) {
     // const code = row.querySelector('.code').value;
     // const year = row.querySelector('.year').value;
 
-    const businessName = row.querySelector('.name').value;
+    const businessName = row.children[0].innerText.toString();
     const businessLocation = row.querySelector('.location').value;
     const owner = row.querySelector('.owner').value;
-    const code = row.querySelector('.code').value;
+    const code = row.children[3].innerText.toString(); 
     const year = row.querySelector('.year').value;
     const storage = row.querySelector('.storage').value;
 
@@ -373,44 +375,49 @@ async function handleSave(event) {
     // };
 
     try {
-
-        const res = await fetch(baseUrl + '/dashboard/updateBusiness', {
+        const options = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 _id,
-                businessName,
                 businessLocation,
                 owner,
-                code,
                 year,
                 storage
             })
-        });
-        if (res.ok) {
-            alert('Data updated successfully!');
-            await loadtable();
-            tableVisibility.style.display = "block";
-        } else {
-            alert('Failed to update data.');
+        };
+        const res = await fetch(baseUrl + '/dashboard/updateBusiness', options);
+        getResults(res);
+        if (res.status == "400" || res.status == "405" || res.status == "406") {
+            return;
         }
+        const options2 = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ businessName: businessName, code: code })
+        };
+        const response = await fetch(baseUrl + '/dashboard/getData', options2);
+        const records = await response.json();
+        // generateRow(records);
+        row.innerHTML = newrow2(records);
     }
     catch (error) {
         console.error('Error:', error);
     }
-    loadtable();
 }
 function handleCancel(event) {
     const row = event.target.closest('tr');
-    const businessName = row.querySelector('input[type="text"]').value;
-    const businessLocation = row.querySelector('input[type="text"]').value;
-    const owner = row.querySelector('input[type="text"]').value;
-    const code = row.querySelector('input[type="text"]').value;
-    const year = row.querySelector('input[type="text"]').value;
-    const storage = row.querySelector('input[type="text"]').value;
-    const enrolledDate = row.querySelector('input[type="hidden"]').value;
+    const businessName = row.children[0].innerText.value;
+    const businessLocation = row.querySelector('input[class="location"]').value;
+    const owner = row.querySelector('input[class="owner"]').value;
+    const code = row.children[3].innerText;
+    const year = row.querySelector('input[class="year"]').value;
+    const storage = row.querySelector('input[class="storage"]').value;
+    enrolledDate = row.children[6].innerText;
 
     row.innerHTML = `
         <td>${businessName}</td>
@@ -462,7 +469,7 @@ function addData() {
         const enrolledDate = formatDateToMMDDYYYYHHMMss(new Date().toString());
 
         if (!businessName || !businessLocation || !owner || !code || !year || !storage) {
-            alert('All fields are required. Please fill in all the fields.');            
+            alert('All fields are required. Please fill in all the fields.');
             return;
         }
 
@@ -481,7 +488,7 @@ function addData() {
             })
         });
         getResults(res);
-        if(res.status ==  "400" || res.status ==  "405" || res.status ==  "406"){
+        if (res.status == "400" || res.status == "405" || res.status == "406") {
             tableBody.removeChild(newRow);
             return;
         }
