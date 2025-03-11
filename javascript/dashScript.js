@@ -4,6 +4,7 @@ let baseUrl = null;
 let tableVisibility = null;
 
 let contentVisibility = null;
+let enrollVisibility = null;
 let entryDate = null
 // import readXlsxFile from 'read-excel-file'
 // import * as XLSX from 'xlsx';
@@ -102,7 +103,7 @@ function closeNav(event) {
 }
 
 function openDashboard(event) {
-    const enrollVisibility = document.getElementById("enrollBtn");
+    enrollVisibility = document.getElementById("enrollBtn");
     event.preventDefault();
     if (tableVisibility.style.display === "block") {
         contentVisibility.style.display = "block";
@@ -120,8 +121,6 @@ async function searchTable(event) {
     event.preventDefault();
     contentVisibility.style.display = "none";
     enrollVisibility.style.display = "block";
-
-    
     var search = document.getElementById("searchVal").value;
     if (search === "") {
         loadtable();
