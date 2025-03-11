@@ -118,6 +118,10 @@ function openDashboard(event) {
 
 async function searchTable(event) {
     event.preventDefault();
+    contentVisibility.style.display = "none";
+    enrollVisibility.style.display = "block";
+
+    
     var search = document.getElementById("searchVal").value;
     if (search === "") {
         loadtable();
