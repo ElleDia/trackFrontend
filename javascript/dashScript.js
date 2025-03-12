@@ -411,7 +411,7 @@ async function handleSave(event) {
 }
 function handleCancel(event) {
     const row = event.target.closest('tr');
-    const businessName = row.children[0].innerText.value;
+    const businessName = row.children[0].innerText;
     const businessLocation = row.querySelector('input[class="location"]').value;
     const owner = row.querySelector('input[class="owner"]').value;
     const code = row.children[3].innerText;
