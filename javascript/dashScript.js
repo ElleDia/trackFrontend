@@ -310,7 +310,7 @@ function generateHeader() {
 
 function handleTableClick(event) {
     if (event.target.classList.contains('edit-row-button')) {
-        handleEdit(event);x
+        handleEdit(event);
     } else if (event.target.classList.contains('save-edit-button')) {
         handleSave(event);
     } else if (event.target.classList.contains('cancel-edit-button')) {
